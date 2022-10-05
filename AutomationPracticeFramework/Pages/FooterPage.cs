@@ -1,0 +1,27 @@
+﻿using OpenQA.Selenium;
+using OpenQA.Selenium.Support.UI;
+using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace AutomationPracticeFramework.Pages
+{
+    class FooterPage
+    {
+        readonly IWebDriver driver;
+        public By footer = By.ClassName("footer-container");
+        public FooterPage(IWebDriver driver)
+        {
+            this.driver = driver;
+            var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(15));
+            wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementExists(footer));
+        }
+
+        public void ClickOnInformationLink(string title)
+        {
+            By link = By.CssSelector(".toggle-footer [title='" + title + "']");
+            var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(15));
+            wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(link)).Click();
+        }
+    }
+}
